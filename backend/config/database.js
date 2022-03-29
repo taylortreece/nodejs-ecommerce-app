@@ -1,19 +1,16 @@
 const { MONGO_URI } = process.env;
 const { MongoClient, ServerApiVersion } = require('mongodb');
+const mongoose = require("mongoose");
 
 exports.connect = () => {
-  console.log("connecting to db...")
-  try {
-      const client = new MongoClient(MONGO_URI, { 
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        serverApi: ServerApiVersion.v1
-      });
-  
-      client.connect();
-      console.log("client has connected to MongoDB.");
-  
-    } catch(err) {
-      console.log("error connecting to MongoDB: ", err);
-  }
+  mongoose
+  .connect(MONGO_URI)
+  .then(() => {
+    console.log("Successfully connected to database");
+  })
+  .catch((error) => {
+    console.log("database connection failed. exiting now...");
+    console.error(error);
+    process.exit(1);
+  });
 }
