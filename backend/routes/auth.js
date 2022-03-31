@@ -1,14 +1,18 @@
 var express = require("express");
 const User = require("../models/user");
 var router = express.Router();
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken")
 
-router.get('/login', async (req, res, next) => {
+router.post('/login', async (req, res, next) => {
     res.send("Login endpoint has been hit.")
 })
 
-router.get('/register', async (req, res, next) => {
+router.post('/register', async (req, res, next) => {
     try {
         const { firstName, lastName, email, password } = req.body;
+
+        console.log(firstName, lastName, email, password)
 
         if (!(email && password && firstName && lastName)) {
             res.status(400).send("All inputs are required");
@@ -28,7 +32,7 @@ router.get('/register', async (req, res, next) => {
         const user = await User.create({
             first_name: firstName,
             last_name: lastName,
-            email: email,
+            email: email.toLowerCase(),
             password: encrypedUserPassword
         });
 
