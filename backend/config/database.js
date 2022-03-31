@@ -1,5 +1,4 @@
 const { MONGO_URI } = process.env;
-const { MongoClient, ServerApiVersion } = require('mongodb');
 const mongoose = require("mongoose");
 
 exports.connect = () => {

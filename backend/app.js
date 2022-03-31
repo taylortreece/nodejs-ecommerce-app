@@ -1,5 +1,6 @@
 require('dotenv').config();
 require("./config/database").connect();
+var fs = require('fs')
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -18,7 +19,12 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(logger('dev'));
+var accessLogStream = fs.createWriteStream(
+  path.join(__dirname, './logs/access.log'), 
+  { flags: 'a' }
+  )
+
+app.use(logger('combined', { stream: accessLogStream }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
