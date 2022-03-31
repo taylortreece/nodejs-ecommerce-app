@@ -5,7 +5,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+var logger = require('./config/morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -24,12 +24,8 @@ app.set('view engine', 'jade');
 
 // create log stream && log content
 // https://github.com/expressjs/morgan#use-custom-token-formats
-var accessLogStream = fs.createWriteStream(
-  path.join(__dirname, './logs/access.log'), 
-  { flags: 'a' }
-  )
 
-app.use(logger('combined', { stream: accessLogStream }));
+app.use(logger);
 
 // Configuration
 app.use(express.json());
