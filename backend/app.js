@@ -9,9 +9,12 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var authRouter = require('./routes/auth.js')
 var productsRouter = require('./routes/products');
 var ordersRouter = require('./routes/orders');
 var cartsRouter = require('./routes/carts')
+
+const User = require("./models/user")
 
 var app = express();
 
@@ -19,19 +22,25 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+// create log stream && log content
+// https://github.com/expressjs/morgan#use-custom-token-formats
 var accessLogStream = fs.createWriteStream(
   path.join(__dirname, './logs/access.log'), 
   { flags: 'a' }
   )
 
 app.use(logger('combined', { stream: accessLogStream }));
+
+// Configuration
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/auth', authRouter)
 app.use('/products', productsRouter);
 app.use('/orders', ordersRouter);
 app.use('/carts', cartsRouter)

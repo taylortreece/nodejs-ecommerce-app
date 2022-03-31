@@ -2,3 +2,6 @@
 [0mGET / [32m200 [0m8.848 ms - 170[0m
 [0mGET / [32m200 [0m169.062 ms - 170[0m
 ::1 - - [31/Mar/2022:22:38:55 +0000] "GET / HTTP/1.1" 200 170 "-" "PostmanRuntime/7.29.0"
+::1 - - [31/Mar/2022:23:09:33 +0000] "GET /auth/login HTTP/1.1" 200 28 "-" "PostmanRuntime/7.29.0"
+::1 - - [31/Mar/2022:23:09:40 +0000] "GET /auth/register HTTP/1.1" 200 28 "-" "PostmanRuntime/7.29.0"
+::1 - - [31/Mar/2022:23:09:42 +0000] "GET /auth/register HTTP/1.1" 200 28 "-" "PostmanRuntime/7.29.0"
