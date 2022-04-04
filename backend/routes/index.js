@@ -4,7 +4,7 @@ const auth = require("../src/middleware/verifyToken")
 
 /* GET home page. */
 router.get('/', auth, function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.status(200).send("Welcome to the home page.")
 });
 
 module.exports = router;
