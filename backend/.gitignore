@@ -2,4 +2,4 @@
 **/*.log
 
 *.pem
-**./Todo.md
+../Todo.md
