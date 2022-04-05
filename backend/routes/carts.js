@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
+const auth = require("../src/middleware/verifyToken")
 
-router.get('/', async (req, res, next) => {
+router.get('/', auth, async (req, res, next) => {
     res.send("Carts endpoint has been hit.")
 })
 
