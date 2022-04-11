@@ -1,15 +1,22 @@
 const { MONGO_URI } = process.env;
 const mongoose = require("mongoose");
 
-exports.connect = () => {
-  mongoose
-  .connect(MONGO_URI)
-  .then(() => {
-    console.log("Successfully connected to database");
-  })
-  .catch((error) => {
-    console.log("database connection failed. exiting now...");
-    console.error(error);
-    process.exit(1);
-  });
-}
+module.exports = {
+  mongoose,
+  connect: async () => {
+    try {
+      await mongoose.connect(MONGO_URI);
+      console.log("DB Connection Successful.")
+    } catch(err) {
+      console.log("DB Connection Err: ", err)
+    }
+  },
+  disconnect: async (done) => {
+    try {
+      await mongoose.diconnect(done);
+      console.log("DB Disconnection Successful.")
+    } catch(err) {
+      console.log("DB Disonnection Err: ", err)
+    }
+  },
+};
