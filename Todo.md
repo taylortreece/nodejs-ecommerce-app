@@ -5,4 +5,6 @@ Create Tests with Jest
     - get jest to work on local system @done
 
 Authenticaton
-    - add sanitization to loginand registration
+    - add sanitization to login and registration
+    - continue securing login:
+        - add TLS
