@@ -46,3 +46,4 @@
 ::1 - - [04/Apr/2022:00:06:33 +0000] "POST /auth/login HTTP/1.1" 200 441 "-" "PostmanRuntime/7.29.0"
 ::1 - - [04/Apr/2022:00:07:29 +0000] "GET / HTTP/1.1" 200 25 "-" "PostmanRuntime/7.29.0"
 ::1 - - [05/Apr/2022:22:36:00 +0000] "POST /auth/login HTTP/1.1" 200 441 "-" "PostmanRuntime/7.29.0"
+::ffff:127.0.0.1 - - [11/Apr/2022:12:14:49 +0000] "GET / HTTP/1.1" 403 38 "-" "-"

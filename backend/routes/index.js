@@ -3,7 +3,7 @@ var router = express.Router();
 const auth = require("../src/middleware/verifyToken")
 
 /* GET home page. */
-router.get('/', auth, function(req, res, next) {
+router.get('/', function(req, res, next) {
   res.status(200).send("Welcome to the home page.")
 });
 
