@@ -8,7 +8,7 @@ module.exports = {
       await mongoose.connect(MONGO_URI);
       console.log("DB Connection Successful.")
     } catch(err) {
-      console.log("DB Connection Err: ", err)
+      console.log("DB Connection Error: ", err)
     }
   },
   disconnect: async (done) => {
@@ -16,7 +16,7 @@ module.exports = {
       await mongoose.diconnect(done);
       console.log("DB Disconnection Successful.")
     } catch(err) {
-      console.log("DB Disonnection Err: ", err)
+      console.log("DB Disonnection Error: ", err)
     }
   },
 };
