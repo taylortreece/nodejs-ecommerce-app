@@ -3,3 +3,5 @@
 
 *.pem
 ../Todo.md
+
+./node_modules
