@@ -1,6 +1,7 @@
 const request = require("supertest");
 const app = require("../backend/app");
 const mongoose = require("mongoose")
+const { MailSlurp } = require("mailslurp-client")
 
 afterAll(done => {
   mongoose.connection.close()
@@ -17,5 +18,11 @@ test("It should response the GET method from '/products'", async () => {
       .get("/products")
       .expect(200)
 });
+
+describe("registration and login", () => {
+  it("can sign up as a new user", async () => {
+
+  })
+}) 
 
 // add test for mongoDB Connection
