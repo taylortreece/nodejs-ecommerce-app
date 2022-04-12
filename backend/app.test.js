@@ -2,6 +2,7 @@ const request = require("supertest");
 const app = require("../backend/app");
 const mongoose = require("mongoose")
 const { MailSlurp } = require("mailslurp-client")
+const MAILSLURP_KEY = process.env.MAILSLURP_KEY
 
 afterAll(done => {
   mongoose.connection.close()
