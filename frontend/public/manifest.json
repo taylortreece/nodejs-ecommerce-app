@@ -1,9 +1,0 @@
-{
-  "short_name": "Ecommerce Training",
-  "name": "Node.js Ecommerce Application",
-  "icons": [
-    
-  ],
-  "start_url": ".",
-  "display": "standalone"
-}
