@@ -17,6 +17,7 @@
     "http-errors-express": "^3.1.0",
     "jade": "^0.29.0",
     "jsonwebtoken": "^8.5.1",
+    "mailslurp-client": "^15.7.4",
     "mongodb": "^4.4.1",
     "mongoose": "^6.2.8",
     "morgan": "~1.9.1",
