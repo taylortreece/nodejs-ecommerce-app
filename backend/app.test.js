@@ -10,8 +10,7 @@ afterAll((done) => {
 });
 
 test("It should response the GET method from '/'", async () => {
-  const response = await request(app).get("/");
-  expect(response.statusCode).toBe(200);
+  return await request(app).get("/").expect(200);
 });
 
 test("It should response the GET method from '/products'", async () => {
