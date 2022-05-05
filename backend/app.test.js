@@ -17,6 +17,10 @@ test("It should response the GET method from '/products'", async () => {
   return await request(app).get("/products").expect(200);
 });
 
+test("It should respond the GET method from '/login'", async () => {
+  return await request(app).get("/products").expect(200);
+});
+
 describe("registration and login", () => {
   it("can sign up as a new user", async () => {});
 });
