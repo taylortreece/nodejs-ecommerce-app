@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const auth = require("../src/middleware/verifyToken")
+const auth = require("../middleware/verifyToken");
 
 /* GET users listing. */
 router.get('/', auth, async function(req, res, next) {
