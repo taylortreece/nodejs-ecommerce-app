@@ -4,3 +4,5 @@
 ../Todo.md
 
 node_modules/
+
+*.log
