@@ -1,22 +1,22 @@
-require("dotenv").config();
-require("./src/config/database").connect();
+import "dotenv/config";
+require("./config/database").connect();
 const cors = require("cors");
-const { corsOptions } = require("./src/config/cors");
+const { corsOptions } = require("./config/cors");
 var fs = require("fs");
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
-var logger = require("./src/config/morgan");
+var logger = require("./config/morgan");
 
-var indexRouter = require("./src/routes/index");
-var usersRouter = require("./src/routes/users");
-var authRouter = require("./src/routes/auth.js");
-var productsRouter = require("./src/routes/products");
-var ordersRouter = require("./src/routes/orders");
-var cartsRouter = require("./src/routes/carts");
+var indexRouter = require("./routes/index");
+var usersRouter = require("./routes/users");
+var authRouter = require("./routes/auth.js");
+var productsRouter = require("./routes/products");
+var ordersRouter = require("./routes/orders");
+var cartsRouter = require("./routes/carts");
 
-const User = require("./src/models/user");
+const User = require("./models/user");
 
 var app = express();
 
