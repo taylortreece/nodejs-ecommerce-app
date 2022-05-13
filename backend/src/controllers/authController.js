@@ -1,11 +1,9 @@
-const express = require("express");
-const User = require("../models/user");
-const router = express.Router();
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+import User from "../models/user";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 // REGISTER
-exports.register = async (req, res, next) => {
+export const register = async (req, res, next) => {
   try {
     const { firstName, lastName, email, password } = req.body;
 
@@ -48,7 +46,7 @@ exports.register = async (req, res, next) => {
 };
 
 // LOGIN
-exports.login = async (req, res, next) => {
+export const login = async (req, res, next) => {
   try {
     // Get user input
     const { email, password } = req.body;
@@ -83,5 +81,3 @@ exports.login = async (req, res, next) => {
     res.status(400).send("error");
   }
 };
-
-module.exports = router;

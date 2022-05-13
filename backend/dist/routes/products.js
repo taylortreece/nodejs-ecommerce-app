@@ -1,12 +1,18 @@
 "use strict";
 
-var express = require("express");
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
 
-var router = express.Router();
+var _express = _interopRequireDefault(require("express"));
 
-const auth = require("../middleware/verifyToken");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const router = _express.default.Router();
 
 router.get("/", async (req, res, next) => {
   res.send("Products endpoint has been hit.");
 });
-module.exports = router;
+var _default = router;
+exports.default = _default;

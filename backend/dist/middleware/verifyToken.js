@@ -1,6 +1,13 @@
 "use strict";
 
-const jwt = require("jsonwebtoken");
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.verifyToken = void 0;
+
+var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const config = process.env;
 
@@ -12,7 +19,8 @@ const verifyToken = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, config.TOKEN_KEY);
+    const decoded = _jsonwebtoken.default.verify(token, config.TOKEN_KEY);
+
     req.user = decoded;
   } catch (err) {
     return res.status(401).send("Invalid Token");
@@ -21,4 +29,4 @@ const verifyToken = (req, res, next) => {
   return next();
 };
 
-module.exports = verifyToken;
+exports.verifyToken = verifyToken;

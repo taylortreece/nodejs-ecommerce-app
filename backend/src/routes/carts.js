@@ -1,9 +1,9 @@
-var express = require("express");
-var router = express.Router();
-const auth = require("../middleware/verifyToken");
+import express from "express";
+import { verifyToken as auth } from "../middleware/verifyToken";
+const router = express.Router();
 
 router.get("/", auth, async (req, res, next) => {
   res.send("Carts endpoint has been hit.");
 });
 
-module.exports = router;
+export default router;

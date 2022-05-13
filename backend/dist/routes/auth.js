@@ -1,17 +1,25 @@
 "use strict";
 
-const express = require("express");
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
 
-const router = express.Router();
+var _express = _interopRequireDefault(require("express"));
 
-const auth = require("../controllers/authController"); // REGISTER
+var _authController = require("../controllers/authController");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const router = _express.default.Router(); // REGISTER
 
 
 router.post("/register", (req, res, next) => {
-  auth.register(req, res, next);
+  (0, _authController.register)(req, res, next);
 }); // LOGIN
 
 router.post("/login", (req, res, next) => {
-  auth.login(req, res, next);
+  (0, _authController.login)(req, res, next);
 });
-module.exports = router;
+var _default = router;
+exports.default = _default;

@@ -1,17 +1,20 @@
 "use strict";
 
-const express = require("express");
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.register = exports.login = void 0;
 
-const User = require("../models/user");
+var _user = _interopRequireDefault(require("../models/user"));
 
-const router = express.Router();
+var _bcrypt = _interopRequireDefault(require("bcrypt"));
 
-const bcrypt = require("bcrypt");
+var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
 
-const jwt = require("jsonwebtoken"); // REGISTER
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-
-exports.register = async (req, res, next) => {
+// REGISTER
+const register = async (req, res, next) => {
   try {
     const {
       firstName,
@@ -26,7 +29,7 @@ exports.register = async (req, res, next) => {
     // validate if user exists in our database
 
 
-    const oldUser = await User.findOne({
+    const oldUser = await _user.default.findOne({
       email
     });
 
@@ -35,20 +38,21 @@ exports.register = async (req, res, next) => {
     } // encrypt user password
 
 
-    encrypedUserPassword = await bcrypt.hash(password, 10);
-    const user = await User.create({
+    encrypedUserPassword = await _bcrypt.default.hash(password, 10);
+    const user = await _user.default.create({
       first_name: firstName,
       last_name: lastName,
       email: email.toLowerCase(),
       password: encrypedUserPassword
     }); // create token
 
-    const token = jwt.sign({
+    const token = _jsonwebtoken.default.sign({
       user_id: user._id,
       email
     }, process.env.TOKEN_KEY, {
       expiresIn: "5h"
     });
+
     user.token = token;
     res.status(201).json(user);
   } catch (err) {
@@ -58,7 +62,9 @@ exports.register = async (req, res, next) => {
 }; // LOGIN
 
 
-exports.login = async (req, res, next) => {
+exports.register = register;
+
+const login = async (req, res, next) => {
   try {
     // Get user input
     const {
@@ -72,20 +78,22 @@ exports.login = async (req, res, next) => {
     } // Validate if user exist in our database
 
 
-    const user = await User.findOne({
+    const user = await _user.default.findOne({
       email
     });
     console.log(JSON.stringify(user));
 
-    if (user && (await bcrypt.compare(password, user.password))) {
+    if (user && (await _bcrypt.default.compare(password, user.password))) {
       //Create token
       console.log("Token_KEY", process.env.TOKEN_KEY);
-      const token = jwt.sign({
+
+      const token = _jsonwebtoken.default.sign({
         user_id: user._id,
         email
       }, process.env.TOKEN_KEY, {
         expiresIn: "24h"
       });
+
       console.log(JSON.stringify(token)); // Save user token
 
       user.token = token;
@@ -98,4 +106,4 @@ exports.login = async (req, res, next) => {
   }
 };
 
-module.exports = router;
+exports.login = login;
