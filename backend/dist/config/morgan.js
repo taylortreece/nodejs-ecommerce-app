@@ -1,15 +1,23 @@
 "use strict";
 
-const morgan = require("morgan");
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.logger = void 0;
 
-const fs = require("fs");
+var _morgan = _interopRequireDefault(require("morgan"));
 
-var path = require("path");
+var _fs = _interopRequireDefault(require("fs"));
 
-const accessLogStream = fs.createWriteStream(path.join(__dirname, "../../logs/access.log"), {
+var _path = _interopRequireDefault(require("path"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const accessLogStream = _fs.default.createWriteStream(_path.default.join(__dirname, "../../logs/access.log"), {
   flags: "a"
 });
-const logger = morgan("combined", {
+
+const logger = (0, _morgan.default)("combined", {
   stream: accessLogStream
 });
-module.exports = logger;
+exports.logger = logger;

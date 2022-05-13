@@ -16,7 +16,7 @@ var _path = _interopRequireDefault(require("path"));
 
 var _cookieParser = _interopRequireDefault(require("cookie-parser"));
 
-var _morgan = _interopRequireDefault(require("./config/morgan"));
+var _morgan = require("./config/morgan");
 
 var _index = _interopRequireDefault(require("./routes/index"));
 
@@ -50,7 +50,7 @@ app.use(_express.default.urlencoded({
 }));
 app.use((0, _cookieParser.default)());
 app.use(_express.default.static(_path.default.join(__dirname, "public")));
-app.use(_morgan.default); // logs: https://github.com/expressjs/morgan#use-custom-token-formats
+app.use(_morgan.logger); // logs: https://github.com/expressjs/morgan#use-custom-token-formats
 
 app.use((0, _cors.default)(_cors2.corsOptions)); // Routes
 
