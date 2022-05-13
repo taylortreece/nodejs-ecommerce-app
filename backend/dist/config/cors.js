@@ -1,10 +1,12 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.corsOptions = void 0;
 const corsOptions = {
-  origin: '*',
+  origin: "*",
   optionsSuccessStatus: 200 // for some legacy browsers
 
 };
-module.exports = {
-  corsOptions
-};
+exports.corsOptions = corsOptions;

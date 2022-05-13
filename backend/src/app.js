@@ -1,9 +1,11 @@
+// DB SETUP
 import "dotenv/config";
-import db from "./config/database";
-db.connect();
+import { connect } from "./config/database";
+connect();
+
+// REQUIREMENTS
 import cors from "cors";
 import { corsOptions } from "./config/cors";
-import fs from "fs";
 import createError from "http-errors";
 import express from "express";
 import path from "path";

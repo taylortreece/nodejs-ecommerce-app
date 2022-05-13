@@ -2,13 +2,11 @@
 
 require("dotenv/config");
 
-var _database = _interopRequireDefault(require("./config/database"));
+var _database = require("./config/database");
 
 var _cors = _interopRequireDefault(require("cors"));
 
 var _cors2 = require("./config/cors");
-
-var _fs = _interopRequireDefault(require("fs"));
 
 var _httpErrors = _interopRequireDefault(require("http-errors"));
 
@@ -36,7 +34,8 @@ var _user = _interopRequireDefault(require("./models/user"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_database.default.connect();
+// DB SETUP
+(0, _database.connect)(); // REQUIREMENTS
 
 const app = (0, _express.default)(); // view engine setup
 
