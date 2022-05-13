@@ -1,4 +1,6 @@
 .env
+.prettierrc
+.eslintrc
 
 *.pem
 ../Todo.md
