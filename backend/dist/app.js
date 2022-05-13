@@ -2,6 +2,12 @@
 
 require("dotenv/config");
 
+var _database = _interopRequireDefault(require("./config/database"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_database.default.connect();
+
 require("./config/database").connect();
 
 const cors = require("cors");

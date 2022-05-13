@@ -1,4 +1,6 @@
 import "dotenv/config";
+import db from "./config/database";
+db.connect();
 require("./config/database").connect();
 const cors = require("cors");
 const { corsOptions } = require("./config/cors");
