@@ -4,70 +4,66 @@ require("dotenv/config");
 
 var _database = _interopRequireDefault(require("./config/database"));
 
+var _cors = _interopRequireDefault(require("cors"));
+
+var _cors2 = require("./config/cors");
+
+var _fs = _interopRequireDefault(require("fs"));
+
+var _httpErrors = _interopRequireDefault(require("http-errors"));
+
+var _express = _interopRequireDefault(require("express"));
+
+var _path = _interopRequireDefault(require("path"));
+
+var _cookieParser = _interopRequireDefault(require("cookie-parser"));
+
+var _morgan = _interopRequireDefault(require("./config/morgan"));
+
+var _index = _interopRequireDefault(require("./routes/index"));
+
+var _users = _interopRequireDefault(require("./routes/users"));
+
+var _auth = _interopRequireDefault(require("./routes/auth"));
+
+var _products = _interopRequireDefault(require("./routes/products"));
+
+var _orders = _interopRequireDefault(require("./routes/orders"));
+
+var _carts = _interopRequireDefault(require("./routes/carts"));
+
+var _user = _interopRequireDefault(require("./models/user"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _database.default.connect();
 
-require("./config/database").connect();
+const app = (0, _express.default)(); // view engine setup
 
-const cors = require("cors");
-
-const {
-  corsOptions
-} = require("./config/cors");
-
-var fs = require("fs");
-
-var createError = require("http-errors");
-
-var express = require("express");
-
-var path = require("path");
-
-var cookieParser = require("cookie-parser");
-
-var logger = require("./config/morgan");
-
-var indexRouter = require("./routes/index");
-
-var usersRouter = require("./routes/users");
-
-var authRouter = require("./routes/auth.js");
-
-var productsRouter = require("./routes/products");
-
-var ordersRouter = require("./routes/orders");
-
-var cartsRouter = require("./routes/carts");
-
-const User = require("./models/user");
-
-var app = express(); // view engine setup
-
-app.set("views", path.join(__dirname, "views"));
+app.set("views", _path.default.join(__dirname, "views"));
 app.set("view engine", "jade"); // Configuration
 
-app.use(express.json({
+app.use(_express.default.json({
   limit: "50mb"
 }));
-app.use(express.urlencoded({
+app.use(_express.default.urlencoded({
   extended: false
 }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
-app.use(logger); // logs: https://github.com/expressjs/morgan#use-custom-token-formats
+app.use((0, _cookieParser.default)());
+app.use(_express.default.static(_path.default.join(__dirname, "public")));
+app.use(_morgan.default); // logs: https://github.com/expressjs/morgan#use-custom-token-formats
 
-app.use(cors(corsOptions)); // Routes
+app.use((0, _cors.default)(_cors2.corsOptions)); // Routes
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/auth", authRouter);
-app.use("/products", productsRouter);
-app.use("/orders", ordersRouter);
-app.use("/carts", cartsRouter); // catch 404 and forward to error handler
+app.use("/", _index.default);
+app.use("/users", _users.default);
+app.use("/auth", _auth.default);
+app.use("/products", _products.default);
+app.use("/orders", _orders.default);
+app.use("/carts", _carts.default); // catch 404 and forward to error handler
 
 app.use(function (req, res, next) {
-  next(createError(404));
+  next((0, _httpErrors.default)(404));
 }); // error handler
 
 app.use(function (err, req, res, next) {

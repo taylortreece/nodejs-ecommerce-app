@@ -1,26 +1,27 @@
 import "dotenv/config";
 import db from "./config/database";
 db.connect();
-require("./config/database").connect();
-const cors = require("cors");
-const { corsOptions } = require("./config/cors");
-var fs = require("fs");
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("./config/morgan");
+import cors from "cors";
+import { corsOptions } from "./config/cors";
+import fs from "fs";
+import createError from "http-errors";
+import express from "express";
+import path from "path";
+import cookieParser from "cookie-parser";
+import logger from "./config/morgan";
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
-var authRouter = require("./routes/auth.js");
-var productsRouter = require("./routes/products");
-var ordersRouter = require("./routes/orders");
-var cartsRouter = require("./routes/carts");
+// ROUTES
+import indexRouter from "./routes/index";
+import usersRouter from "./routes/users";
+import authRouter from "./routes/auth";
+import productsRouter from "./routes/products";
+import ordersRouter from "./routes/orders";
+import cartsRouter from "./routes/carts";
 
-const User = require("./models/user");
+// MODELS
+import User from "./models/user";
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
