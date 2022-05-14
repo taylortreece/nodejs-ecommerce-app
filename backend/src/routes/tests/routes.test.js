@@ -2,7 +2,7 @@
 // const MAILSLURP_KEY = process.env.MAILSLURP_KEY;
 // import { DescribeDomainOptionsFromJSON } from "mailslurp-client";
 import request from "supertest";
-import app from "./app";
+import app from "../../app";
 import { MongoClient } from "mongodb";
 
 describe("routes", () => {
@@ -53,9 +53,3 @@ describe("routes", () => {
       });
    });
 });
-
-// describe("registration and login", () => {
-//   it("can sign up as a new user", async () => {});
-// });
-
-// add test for mongoDB Connection
