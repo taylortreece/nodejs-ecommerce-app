@@ -18,7 +18,7 @@ test("It should response the GET method from '/products'", async () => {
 });
 
 test("It should respond the POST method from '/auth/login'", async () => {
-   return await request(app).post('/auth/login').expect(200);
+   return await request(app).post('/auth/login').expect(400);
 });
 
 // describe("registration and login", () => {

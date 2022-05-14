@@ -13,3 +13,4 @@
 
 -  finish products, orders, carts
 -  create tests for users, products, orders, carts
+-  configure jest to run with a more current version of node if necessary

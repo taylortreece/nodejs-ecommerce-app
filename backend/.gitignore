@@ -2,7 +2,7 @@
 
 *.pem
 ../Todo.md
-
+dist/
 node_modules/
 
 *.log
