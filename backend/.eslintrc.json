@@ -3,14 +3,13 @@
         "browser": true,
         "es2021": true
     },
-    "extends": "eslint:recommended",
+    "extends": "standard",
     "parserOptions": {
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
     "plugins": [],
     "rules": {
-        "semi": [2, "always"],
         "node/exports-style": [
             "error",
             "module.exports"
@@ -40,6 +39,10 @@
             "always"
         ],
         "node/prefer-promises/dns": "error",
-        "node/prefer-promises/fs": "error"
+        "node/prefer-promises/fs": "error",
+        "semi": [
+            2,
+            "always"
+        ]
     }
 }
