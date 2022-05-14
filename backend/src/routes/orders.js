@@ -1,5 +1,5 @@
+// import { SenderFromJSON } from 'mailslurp-client';
 import express from 'express';
-import { SenderFromJSON } from 'mailslurp-client';
 import { verifyToken as auth } from '../middleware/verifyToken';
 const router = express.Router();
 

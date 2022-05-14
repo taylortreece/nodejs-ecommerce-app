@@ -24,7 +24,7 @@ const register = async (req, res, next) => {
     } = req.body;
 
     if (!(email && password && firstName && lastName)) {
-      res.status(400).send("All inputs are required");
+      res.status(400).send('All inputs are required');
     } // check if user already exists
     // validate if user exists in our database
 
@@ -34,7 +34,7 @@ const register = async (req, res, next) => {
     });
 
     if (oldUser) {
-      return res.status(409).send("User already exists. Please login.");
+      return res.status(409).send('User already exists. Please login.');
     } // encrypt user password
 
 
@@ -50,7 +50,7 @@ const register = async (req, res, next) => {
       user_id: user._id,
       email
     }, process.env.TOKEN_KEY, {
-      expiresIn: "5h"
+      expiresIn: '5h'
     });
 
     user.token = token;
@@ -74,7 +74,7 @@ const login = async (req, res, next) => {
     console.log(email, password); // Validate user input
 
     if (!(email && password)) {
-      res.status(400).send("All input is required");
+      res.status(400).send('All input is required');
     } // Validate if user exist in our database
 
 
@@ -85,13 +85,13 @@ const login = async (req, res, next) => {
 
     if (user && (await _bcrypt.default.compare(password, user.password))) {
       //Create token
-      console.log("Token_KEY", process.env.TOKEN_KEY);
+      console.log('Token_KEY', process.env.TOKEN_KEY);
 
       const token = _jsonwebtoken.default.sign({
         user_id: user._id,
         email
       }, process.env.TOKEN_KEY, {
-        expiresIn: "24h"
+        expiresIn: '24h'
       });
 
       console.log(JSON.stringify(token)); // Save user token
@@ -100,9 +100,9 @@ const login = async (req, res, next) => {
       return res.status(200).json(user);
     }
 
-    return res.status(400).send("Invalid Credentials");
+    return res.status(400).send('Invalid Credentials');
   } catch (err) {
-    res.status(400).send("error");
+    res.status(400).send('error');
   }
 };
 

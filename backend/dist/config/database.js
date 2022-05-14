@@ -15,9 +15,10 @@ const {
 
 const connect = async () => {
   try {
-    await _mongoose.default.connect(MONGO_URI); // console.log("DB Connection Successful.")
+    await _mongoose.default.connect(MONGO_URI);
+    console.log('DB Connection Successful.');
   } catch (err) {
-    console.log("DB Connection Error: ", err);
+    console.log('DB Connection Error: ', err);
   }
 };
 
@@ -26,9 +27,9 @@ exports.connect = connect;
 const disconnect = async done => {
   try {
     await _mongoose.default.diconnect(done);
-    console.log("DB Disconnection Successful.");
+    console.log('DB Disconnection Successful.');
   } catch (err) {
-    console.log("DB Disonnection Error: ", err);
+    console.log('DB Disonnection Error: ', err);
   }
 };
 
