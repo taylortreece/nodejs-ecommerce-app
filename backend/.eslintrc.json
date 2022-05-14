@@ -10,6 +10,7 @@
     },
     "plugins": [],
     "rules": {
+        "semi": [2, "always"],
         "node/exports-style": [
             "error",
             "module.exports"
