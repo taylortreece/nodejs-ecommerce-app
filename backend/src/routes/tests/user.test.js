@@ -1,11 +1,8 @@
-// const { MailSlurp } = require('mailslurp-client');
-// const MAILSLURP_KEY = process.env.MAILSLURP_KEY;
-// import { DescribeDomainOptionsFromJSON } from "mailslurp-client";
 import request from "supertest";
 import app from "../../app";
+import mongoose from "mongoose";
 import { MongoClient } from "mongodb";
 import { v4 as uuid } from "uuid";
-import { ExpiredControllerApi } from "mailslurp-client";
 
 describe("users", () => {
    let connection;
@@ -24,14 +21,19 @@ describe("users", () => {
    });
 
    describe("Register and Login new user", () => {
-      test("New user should be registered", async () => {
-         let user = {
-            firstName: "John",
-            lastName: "Doe",
-            email: `${uuid()}@email.com`,
-            password: `${uuid()}`,
-         };
+      let user = {
+         firstName: "John",
+         lastName: "Doe",
+         email: `${uuid()}@email.com`,
+         password: `${uuid()}`,
+      };
 
+      test("New user should be registered", async () => {
+         console.log(user);
+         return expect(user == user).toBeTruthy();
+      });
+
+      test("New user should be able to login after registration", () => {
          console.log(user);
          return expect(user == user).toBeTruthy();
       });
