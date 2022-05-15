@@ -33,10 +33,10 @@ describe("users", () => {
          // return expect(user == user).toBeTruthy();
       });
 
-      test("New user should be able to login after registration", () => {
+      test("New user should be able to login after registration", async () => {
          console.log("Login Test");
-         // return await request(app).post("/auth/login").send(user).expect(400);
-         return expect(user == user).toBeTruthy();
+         return await request(app).post("/auth/login").send(user).expect(200);
+         // return expect(user == user).toBeTruthy();
       });
    });
 });
