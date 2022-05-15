@@ -6,7 +6,9 @@ import jwt from "jsonwebtoken";
 export const register = async (req, res, next) => {
    try {
       const { firstName, lastName, email, password } = req.body;
+
       console.log("REGISTRATION TEST: HIT");
+
       if (!(email && password && firstName && lastName)) {
          res.status(400).send("All inputs are required");
       }
@@ -20,7 +22,7 @@ export const register = async (req, res, next) => {
       }
 
       // encrypt user password
-      encrypedUserPassword = await bcrypt.hash(password, 10);
+      const encrypedUserPassword = await bcrypt.hash(password, 10);
 
       const user = await User.create({
          first_name: firstName,
@@ -50,18 +52,16 @@ export const login = async (req, res, next) => {
    try {
       // Get user input
       const { email, password } = req.body;
-      console.log(email, password);
       // Validate user input
       if (!(email && password)) {
-         res.status(400).send("All input is required");
+         return res.status(400).send("All input is required");
       }
 
       // Validate if user exist in our database
       const user = await User.findOne({ email });
-      console.log(JSON.stringify(user));
+
       if (user && (await bcrypt.compare(password, user.password))) {
          //Create token
-         console.log("Token_KEY", process.env.TOKEN_KEY);
          const token = jwt.sign(
             { user_id: user._id, email },
             process.env.TOKEN_KEY,
@@ -69,7 +69,6 @@ export const login = async (req, res, next) => {
                expiresIn: "24h",
             }
          );
-         console.log(JSON.stringify(token));
          // Save user token
          user.token = token;
 
@@ -78,6 +77,6 @@ export const login = async (req, res, next) => {
 
       return res.status(400).send("Invalid Credentials");
    } catch (err) {
-      res.status(400).send("error");
+      return res.status(400).send("error");
    }
 };

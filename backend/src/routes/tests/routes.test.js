@@ -1,24 +1,21 @@
-// const { MailSlurp } = require('mailslurp-client');
-// const MAILSLURP_KEY = process.env.MAILSLURP_KEY;
-// import { DescribeDomainOptionsFromJSON } from "mailslurp-client";
+// // const { MailSlurp } = require('mailslurp-client');
+// // const MAILSLURP_KEY = process.env.MAILSLURP_KEY;
+// // import { DescribeDomainOptionsFromJSON } from "mailslurp-client";
 import request from "supertest";
 import app from "../../app";
-import { MongoClient } from "mongodb";
+import mongoose from "mongoose";
+import { MongoMemoryServer } from "mongodb-memory-server";
 
 describe("routes", () => {
-   let connection;
-   let db;
+   let mongoServer;
 
    beforeAll(async () => {
-      connection = await MongoClient.connect(globalThis.__MONGO_URI__, {
-         useNewUrlParser: true,
-         useUnifiedTopology: true,
-      });
-      db = await connection.db(globalThis.__MONGO_DB_NAME__);
+      mongoServer = await MongoMemoryServer.create();
+      await mongoose.connect(mongoServer.getUri(), { dbName: "verifyMASTER" });
    });
 
    afterAll(async () => {
-      await connection.close();
+      await mongoose.disconnect();
    });
 
    describe("index", () => {

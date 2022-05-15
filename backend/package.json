@@ -21,6 +21,7 @@
     "jsonwebtoken": "^8.5.1",
     "mailslurp-client": "^15.7.4",
     "mongodb": "^4.6.0",
+    "mongodb-memory-server": "^8.5.2",
     "mongoose": "^6.2.8",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.15",

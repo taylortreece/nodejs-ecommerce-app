@@ -1,23 +1,19 @@
+// import { MongoClient } from "mongodb";
 import request from "supertest";
 import app from "../../app";
 import mongoose from "mongoose";
-import { MongoClient } from "mongodb";
+import { MongoMemoryServer } from "mongodb-memory-server";
 import { v4 as uuid } from "uuid";
 
 describe("users", () => {
-   let connection;
-   let db;
-
+   let mongoServer;
    beforeAll(async () => {
-      connection = await MongoClient.connect(globalThis.__MONGO_URI__, {
-         useNewUrlParser: true,
-         useUnifiedTopology: true,
-      });
-      db = await connection.db(globalThis.__MONGO_DB_NAME__);
+      mongoServer = await MongoMemoryServer.create();
+      await mongoose.connect(mongoServer.getUri(), { dbName: "verifyMASTER" });
    });
 
    afterAll(async () => {
-      await connection.close();
+      await mongoose.disconnect();
    });
 
    describe("Register and Login new user", () => {
@@ -29,12 +25,17 @@ describe("users", () => {
       };
 
       test("New user should be registered", async () => {
-         console.log(user);
-         return expect(user == user).toBeTruthy();
+         console.log("Registration Test");
+         return await request(app)
+            .post("/auth/register")
+            .send(user)
+            .expect(201);
+         // return expect(user == user).toBeTruthy();
       });
 
       test("New user should be able to login after registration", () => {
-         console.log(user);
+         console.log("Login Test");
+         // return await request(app).post("/auth/login").send(user).expect(400);
          return expect(user == user).toBeTruthy();
       });
    });

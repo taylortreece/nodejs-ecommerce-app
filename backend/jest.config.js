@@ -15,7 +15,7 @@ module.exports = {
 
    // Automatically clear mock calls, instances and results before every test
    // clearMocks: false,
-   preset: "@shelf/jest-mongodb",
+   // preset: "@shelf/jest-mongodb",
    // Indicates whether the coverage information should be collected while executing the test
    collectCoverage: true,
 

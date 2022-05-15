@@ -8,7 +8,6 @@ router.get("/register", (req, res, next) => {
 });
 
 router.post("/register", (req, res, next) => {
-   console.log("ROUTE HIT");
    register(req, res, next);
 });
 
