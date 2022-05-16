@@ -7,8 +7,6 @@ export const register = async (req, res, next) => {
    try {
       const { firstName, lastName, email, password } = req.body;
 
-      console.log("REGISTRATION TEST: HIT");
-
       if (!(email && password && firstName && lastName)) {
          res.status(400).send("All inputs are required");
       }

@@ -1,9 +1,12 @@
 // import { MongoClient } from "mongodb";
 import request from "supertest";
+const assert = require("assert");
 import app from "../../app";
 import mongoose from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
 import { v4 as uuid } from "uuid";
+import bcrypt from "bcrypt";
+import { callbackify } from "util";
 
 describe("users", () => {
    let mongoServer;
@@ -24,19 +27,25 @@ describe("users", () => {
          password: `${uuid()}`,
       };
 
-      test("New user should be registered", async () => {
-         console.log("Registration Test");
-         return await request(app)
-            .post("/auth/register")
-            .send(user)
-            .expect(201);
-         // return expect(user == user).toBeTruthy();
-      });
+      const fields = ["first_name", "last_name", "email", "password", "token"];
 
-      test("New user should be able to login after registration", async () => {
-         console.log("Login Test");
-         return await request(app).post("/auth/login").send(user).expect(200);
-         // return expect(user == user).toBeTruthy();
+      test("New user should be registered and password should be encrypted", async () => {
+         const res = await request(app).post("/auth/register").send(user);
+         expect(res.headers["content-type"]).toMatch(/json/);
+         expect(res.status).toEqual(201);
+         let test = await bcrypt.compare(user.password, res.body.password);
+         console.log({ test });
+         expect(await bcrypt.compare(user.password, res.body.password)).toEqual(
+            true
+         );
       });
    });
 });
+// test("New user should be able to login after registration", async () => {
+//    console.log("Login Test");
+//    return await request(app)
+//       .post("/auth/login")
+//       .send(user)
+//       .expect("Content-Type", "application/json; charset=utf-8")
+//       .expect(200);
+// });
