@@ -35,6 +35,13 @@ describe("users", () => {
          expect(fieldsCheck(res.body, fields)).toEqual(true);
       });
 
+      test("User cannot register with registered email", async () => {
+         const res = await request(app).post("/auth/register").send(user);
+
+         expect(res.status).toEqual(409);
+         expect(res.text).toEqual("User already exists. Please login.");
+      });
+
       test("New user should be able to login after registration", async () => {
          const res = await request(app).post("/auth/login").send(user);
 
