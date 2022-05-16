@@ -34,13 +34,19 @@ describe("users", () => {
          expect(await bcrypt.compare(user.password, res.body.password)).toEqual(
             true
          );
-         expect(res.body.hasOwnProperty("token")).toEqual(true);
+         for (const field of fields) {
+            expect(res.body.hasOwnProperty(field)).toEqual(true);
+         }
       });
+
       test("New user should be able to login after registration", async () => {
          const res = await request(app).post("/auth/login").send(user);
-         console.log("RES: ", res.body);
+
          expect(res.headers["content-type"]).toMatch(/json/);
-         expect(200);
+         expect(res.status).toEqual(200);
+         for (const field of fields) {
+            expect(res.body.hasOwnProperty(field)).toEqual(true);
+         }
       });
    });
 });
