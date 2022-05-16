@@ -1,4 +1,3 @@
-// import { MongoClient } from "mongodb";
 import request from "supertest";
 import app from "../../app";
 import mongoose from "mongoose";
@@ -29,16 +28,17 @@ describe("users", () => {
 
       test("New user should be registered and password should be encrypted", async () => {
          const res = await request(app).post("/auth/register").send(user);
+
          expect(res.headers["content-type"]).toMatch(/json/);
          expect(res.status).toEqual(201);
-         let test = await bcrypt.compare(user.password, res.body.password);
-         console.log({ test });
          expect(await bcrypt.compare(user.password, res.body.password)).toEqual(
             true
          );
+         expect(res.body.hasOwnProperty("token")).toEqual(true);
       });
    });
 });
+
 // test("New user should be able to login after registration", async () => {
 //    console.log("Login Test");
 //    return await request(app)

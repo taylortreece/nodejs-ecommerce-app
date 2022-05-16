@@ -1,6 +1,3 @@
-// // const { MailSlurp } = require('mailslurp-client');
-// // const MAILSLURP_KEY = process.env.MAILSLURP_KEY;
-// // import { DescribeDomainOptionsFromJSON } from "mailslurp-client";
 import request from "supertest";
 import app from "../../app";
 import mongoose from "mongoose";
