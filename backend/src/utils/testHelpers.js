@@ -1,6 +1,6 @@
 export const fieldsCheck = (object, array) => {
    for (const value of array) {
-      if (!obj.hasOwnProperty(value)) {
+      if (!object.hasOwnProperty(value)) {
          return false;
       }
    }

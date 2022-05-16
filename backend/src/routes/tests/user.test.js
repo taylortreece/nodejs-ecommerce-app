@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
 import { v4 as uuid } from "uuid";
 import bcrypt from "bcrypt";
+import { fieldsCheck } from "../../utils/testHelpers";
 
 describe("users", () => {
    let mongoServer;
@@ -34,9 +35,7 @@ describe("users", () => {
          expect(await bcrypt.compare(user.password, res.body.password)).toEqual(
             true
          );
-         for (const field of fields) {
-            expect(res.body.hasOwnProperty(field)).toEqual(true);
-         }
+         expect(fieldsCheck(res.body, fields)).toEqual(true);
       });
 
       test("New user should be able to login after registration", async () => {
@@ -44,9 +43,7 @@ describe("users", () => {
 
          expect(res.headers["content-type"]).toMatch(/json/);
          expect(res.status).toEqual(200);
-         for (const field of fields) {
-            expect(res.body.hasOwnProperty(field)).toEqual(true);
-         }
+         expect(fieldsCheck(res.body, fields)).toEqual(true);
       });
    });
 });
