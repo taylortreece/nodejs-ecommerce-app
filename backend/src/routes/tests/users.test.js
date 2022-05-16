@@ -2,11 +2,15 @@ import request from "supertest";
 import app from "../../app";
 import mongoose from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
-import { v4 as uuid } from "uuid";
-import { fieldsCheck, passwordCheck } from "../../utils/testHelpers";
+import {
+   fieldsCheck,
+   passwordCheck,
+   generateUser,
+} from "../../utils/testHelpers";
 
 describe("users", () => {
    let mongoServer;
+
    beforeAll(async () => {
       mongoServer = await MongoMemoryServer.create();
       await mongoose.connect(mongoServer.getUri(), { dbName: "verifyMASTER" });
@@ -17,13 +21,8 @@ describe("users", () => {
    });
 
    describe("Register and Login new user", () => {
-      let user = {
-         firstName: "John",
-         lastName: "Doe",
-         email: `${uuid()}@email.com`,
-         password: `${uuid()}`,
-      };
-
+      const user = generateUser();
+      console.log("USER: ", user);
       const fields = ["first_name", "last_name", "email", "password", "token"];
 
       test("New user should be registered and password should be encrypted", async () => {

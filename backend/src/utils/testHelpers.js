@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import { v4 as uuid } from "uuid";
 
 export const fieldsCheck = (object, array) => {
    for (const value of array) {
@@ -11,4 +12,13 @@ export const fieldsCheck = (object, array) => {
 
 export const passwordCheck = async (userPwd, encryptedPwd) => {
    return await bcrypt.compare(userPwd, encryptedPwd);
+};
+
+export const generateUser = () => {
+   return {
+      firstName: "John",
+      lastName: "Doe",
+      email: `${uuid()}@email.com`,
+      password: `${uuid()}`,
+   };
 };
