@@ -39,13 +39,11 @@ describe("users", () => {
             true
          );
       });
+      test("New user should be able to login after registration", async () => {
+         const res = await request(app).post("/auth/login").send(user);
+         console.log("RES: ", res.body);
+         expect(res.headers["content-type"]).toMatch(/json/);
+         expect(200);
+      });
    });
 });
-// test("New user should be able to login after registration", async () => {
-//    console.log("Login Test");
-//    return await request(app)
-//       .post("/auth/login")
-//       .send(user)
-//       .expect("Content-Type", "application/json; charset=utf-8")
-//       .expect(200);
-// });
