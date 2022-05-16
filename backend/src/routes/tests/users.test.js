@@ -3,8 +3,7 @@ import app from "../../app";
 import mongoose from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
 import { v4 as uuid } from "uuid";
-import bcrypt from "bcrypt";
-import { fieldsCheck } from "../../utils/testHelpers";
+import { fieldsCheck, passwordCheck } from "../../utils/testHelpers";
 
 describe("users", () => {
    let mongoServer;
@@ -29,12 +28,12 @@ describe("users", () => {
 
       test("New user should be registered and password should be encrypted", async () => {
          const res = await request(app).post("/auth/register").send(user);
+         const userPwd = user.password;
+         const encryptedPwd = res.body.password;
 
          expect(res.headers["content-type"]).toMatch(/json/);
          expect(res.status).toEqual(201);
-         expect(await bcrypt.compare(user.password, res.body.password)).toEqual(
-            true
-         );
+         expect(await passwordCheck(userPwd, encryptedPwd)).toEqual(true);
          expect(fieldsCheck(res.body, fields)).toEqual(true);
       });
 
