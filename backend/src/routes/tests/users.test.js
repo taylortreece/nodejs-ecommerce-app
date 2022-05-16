@@ -22,10 +22,9 @@ describe("users", () => {
 
    describe("Register and Login new user", () => {
       const user = generateUser();
-      console.log("USER: ", user);
       const fields = ["first_name", "last_name", "email", "password", "token"];
 
-      test("New user should be registered and password should be encrypted", async () => {
+      test("New user should be registered with encrypted password", async () => {
          const res = await request(app).post("/auth/register").send(user);
          const userPwd = user.password;
          const encryptedPwd = res.body.password;
