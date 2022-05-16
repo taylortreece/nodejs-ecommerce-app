@@ -44,15 +44,3 @@ describe("users", () => {
       });
    });
 });
-<<<<<<< HEAD
-=======
-
-// test("New user should be able to login after registration", async () => {
-//    console.log("Login Test");
-//    return await request(app)
-//       .post("/auth/login")
-//       .send(user)
-//       .expect("Content-Type", "application/json; charset=utf-8")
-//       .expect(200);
-// });
->>>>>>> c015d86c9f423b883faac3efe51018ba1d3c1c63
