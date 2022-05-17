@@ -8,6 +8,8 @@ import {
    generateUser,
 } from "../../utils/testHelpers";
 
+let user = generateUser();
+
 describe("users", () => {
    let mongoServer;
 
@@ -21,7 +23,6 @@ describe("users", () => {
    });
 
    describe("Register and Login new user", () => {
-      const user = generateUser();
       const fields = ["first_name", "last_name", "email", "password", "token"];
 
       test("New user should be registered with encrypted password", async () => {
@@ -49,5 +50,11 @@ describe("users", () => {
          expect(res.status).toEqual(200);
          expect(fieldsCheck(res.body, fields)).toEqual(true);
       });
+   });
+
+   describe("Logged in user can view pages that require auth", () => {
+      test("Logged in user can view their cart.", async () => {});
+      test("Logged in user can view their orders.", async () => {});
+      test("Logged in user can view their profile.", async () => {});
    });
 });
