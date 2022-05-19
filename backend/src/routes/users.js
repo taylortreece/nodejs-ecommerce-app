@@ -3,12 +3,12 @@ import { verifyToken as auth } from "../middleware/verifyToken";
 const router = express.Router();
 
 /* GET users listing. */
-router.get("/", auth, async function (req, res, next) {
-  res.send("Users endpoint has been reached.");
+router.get("/", auth, async (req, res, next) => {
+   res.status(200).send("users page reached");
 });
 
 router.get("/:name", auth, async (req, res, next) => {
-  res.send(`hello, ${req.params.name}`);
+   res.send(`hello, ${req.params.name}`);
 });
 
 export default router;

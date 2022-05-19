@@ -45,16 +45,33 @@ describe("users", () => {
 
       test("New user should be able to login after registration", async () => {
          const res = await request(app).post("/auth/login").send(user);
+         const expectedFieldsReturned = fieldsCheck(res.body, fields);
 
          expect(res.headers["content-type"]).toMatch(/json/);
          expect(res.status).toEqual(200);
-         expect(fieldsCheck(res.body, fields)).toEqual(true);
+         expect(expectedFieldsReturned).toEqual(true);
+         user = expectedFieldsReturned ? res.body : user;
       });
    });
 
    describe("Logged in user can view pages that require auth", () => {
-      test("Logged in user can view their cart.", async () => {});
-      test("Logged in user can view their orders.", async () => {});
-      test("Logged in user can view their profile.", async () => {});
+      test("Logged in user can view their profile.", async () => {
+         const res = await request(app).get("/users").send(user);
+
+         expect(res.status).toEqual(200);
+         // expect(res.headers["content-type"]).toMatch(/json/);
+      });
+
+      test("Logged in user can view their orders.", async () => {
+         const res = await request(app).get("/orders").send(user);
+
+         expect(res.status).toEqual(200);
+      });
+
+      test("Logged in user can view their cart.", async () => {
+         const res = await request(app).get("/carts").send(user);
+
+         expect(res.status).toEqual(200);
+      });
    });
 });
