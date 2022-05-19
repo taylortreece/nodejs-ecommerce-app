@@ -12,6 +12,7 @@
       -  (proper account creation)@done
    -  check if registered user can visit pages requiring authorizaion
 
+-  REFACTOR JWT TOKEN OUT OF NODE AUTHENTICATION
 -  finish products, orders, carts
 -  create tests for users, products, orders, carts
 -  configure jest to run with a more current version of node if necessary

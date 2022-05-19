@@ -1,10 +1,11 @@
 import express from "express";
 import { verifyToken as auth } from "../middleware/verifyToken";
+import { displayProfileInfo } from "../controllers/usersController";
 const router = express.Router();
 
 /* GET users listing. */
 router.get("/", auth, async (req, res, next) => {
-   res.status(200).send("users page reached");
+   return await displayProfileInfo(req, res, next);
 });
 
 router.get("/:name", auth, async (req, res, next) => {
